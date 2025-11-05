@@ -1,28 +1,31 @@
-import { useState } from 'react'
+import { useState } from "react";
+import Navbar from "./components/Navbar";
+import GameHeader from "./components/GameHeader";
+import PriceSelector from "./components/PriceSelector";
+import GameDetails from "./components/GameDetails";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [currency, setCurrency] = useState("USD");
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Vibe Coding Platform
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Your AI-powered development environment
-        </p>
-        <div className="text-center">
-          <button
-            onClick={() => setCount(count + 1)}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-          >
-            Count is {count}
-          </button>
-        </div>
+    <div className="min-h-screen bg-neutral-950 text-neutral-100 selection:bg-sky-500/30 selection:text-white">
+      {/* Subtle page background accents */}
+      <div className="fixed inset-0 -z-10">
+        <div className="absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_-20%,rgba(56,189,248,0.12),transparent),radial-gradient(50%_50%_at_120%_20%,rgba(124,58,237,0.10),transparent)]" />
       </div>
-    </div>
-  )
-}
 
-export default App
+      <Navbar />
+      <main>
+        <GameHeader />
+        <PriceSelector selected={currency} onSelect={setCurrency} />
+        <GameDetails />
+      </main>
+
+      <footer className="border-t border-white/5">
+        <div className="mx-auto max-w-6xl px-4 py-8 text-xs text-neutral-500">
+          © {new Date().getFullYear()} Nebula Games. This is a demo store page inspired by modern PC storefronts.
+        </div>
+      </footer>
+    </div>
+  );
+}
